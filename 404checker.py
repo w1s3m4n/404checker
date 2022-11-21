@@ -177,10 +177,10 @@ if __name__ == '__main__':
     parser.add_argument('-v', '--verbose', help="Be verbose", action="store_const", dest="loglevel", const=logging.INFO)
     args = parser.parse_args()
 
-    """if not os.path.isfile(args.input_file):
+    if not os.path.isfile(args.input_file):
         logging.error("File not found! {}".format(args.input_file))
         exit()
-    """
+
     logging.basicConfig(level=args.loglevel)
     try:
         os.remove(os.path.realpath(args.output_file))
