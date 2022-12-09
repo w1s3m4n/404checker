@@ -50,7 +50,7 @@ def requests_page_titles(response):
 async def puppeteer_page_titles(url):
 
     logging.info("  [*] Using Pyppeteer to find bad tags in dynamic html")
-    browser = await launch({"headless": True})
+    browser = await launch({"headless": False})
 
     page = await browser.newPage()
     # set page viewport to the largest size
