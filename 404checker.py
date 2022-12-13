@@ -9,8 +9,10 @@ import logging
 from urllib.parse import urlparse
 import multiprocessing
 import time
+import warnings
 
-# Press ⌃R to execute it or replace it with your code.
+warnings.filterwarnings("ignore", category=UserWarning, module='bs4', message='.*looks like a filename.*')
+
 bad_status_codes = [301, 303, 404]
 bad_texts = ["not found", "not exist", "don't exist", "can't be found", "invalid page", "invalid webpage", "invalid path"]
 probable_html_tags = ["h1", "h2", "h3", "title"]
@@ -50,7 +52,7 @@ def requests_page_titles(response):
 async def puppeteer_page_titles(url):
 
     logging.info("  [*] Using Pyppeteer to find bad tags in dynamic html")
-    browser = await launch({"headless": False})
+    browser = await launch({"headless": True})
 
     page = await browser.newPage()
     # set page viewport to the largest size
