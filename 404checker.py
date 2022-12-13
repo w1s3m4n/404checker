@@ -11,8 +11,6 @@ import multiprocessing
 import time
 import warnings
 
-warnings.filterwarnings("ignore", category=UserWarning, module='bs4', message='.*looks like a filename.*')
-
 bad_status_codes = [301, 303, 404]
 bad_texts = ["not found", "not exist", "don't exist", "can't be found", "invalid page", "invalid webpage", "invalid path"]
 probable_html_tags = ["h1", "h2", "h3", "title"]
@@ -172,6 +170,8 @@ def worker(lines, good_urls):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+
+    warnings.filterwarnings("ignore", category=UserWarning, module='bs4', message='.*looks like a filename.*')
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input_file", help="Input file with urls on it (one per line)", type=str, required=True)
