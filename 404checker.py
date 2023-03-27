@@ -54,18 +54,20 @@ async def puppeteer_page_titles(url):
 
     page = await browser.newPage()
     # set page viewport to the largest size
+    page.setDefaultNavigationTimeout(15000) #Max timeout reduced to 15s
+
     #await page.setViewport({"width": 1600, "height": 900})
     # navigate to the page
-    await page.goto(url)
-    # locate the search box
-    # We check if any of the htlm tags has some text similar to the ones in bad_texts array
     try:
+        await page.goto(url)
+        # locate the search box
+        # We check if any of the htlm tags has some text similar to the ones in bad_texts array
         #await page.waitForSelector("title")
         html = await page.content()
         await browser.close()
         parsed_url = urlparse(page.url)
     except:
-        logging.info("      [!] Timeout while awaiting for tags. Page may be down.")
+        logging.info("      [!] Timeout while awaiting for tags or connecting. Page may be down.")
         return False
 
     # Redirection case
